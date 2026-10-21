@@ -108,15 +108,23 @@ export function AddServerDialog({
   };
 
   return (
-    <Modal className="max-w-lg" open={open} onOpenChange={onOpenChange}>
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-lg font-semibold">{t("addServer.title")}</h2>
-          <Button variant="ghost" onClick={() => onOpenChange(false)}>
-            {t("common.close")}
-          </Button>
-        </div>
+    <Modal
+      className="flex max-w-lg flex-col overflow-hidden p-0"
+      open={open}
+      onOpenChange={onOpenChange}
+    >
+        <form
+          className="flex min-h-0 flex-auto flex-col overflow-hidden"
+          onSubmit={(event) => void handleSubmit(event)}
+        >
+          <div className="flex shrink-0 items-center justify-between px-6 pt-6 pb-4">
+            <h2 className="text-lg font-semibold">{t("addServer.title")}</h2>
+            <Button type="button" variant="ghost" onClick={() => onOpenChange(false)}>
+              {t("common.close")}
+            </Button>
+          </div>
 
-        <form className="space-y-4" onSubmit={(event) => void handleSubmit(event)}>
+          <div className="min-h-0 flex-auto space-y-4 overflow-y-auto overscroll-contain px-6 pb-4">
           <div className="grid gap-2">
             <Label htmlFor="name">{t("common.name")}</Label>
             <Input
@@ -203,8 +211,9 @@ export function AddServerDialog({
           </div>
 
           {error && <p className="text-sm text-[var(--color-destructive)]">{error}</p>}
+          </div>
 
-          <div className="flex justify-end gap-2">
+          <div className="flex shrink-0 justify-end gap-2 border-t border-[var(--color-border)] px-6 py-4">
             <Button type="button" variant="secondary" onClick={() => onOpenChange(false)}>
               {t("common.cancel")}
             </Button>

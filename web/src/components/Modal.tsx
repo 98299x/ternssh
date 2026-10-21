@@ -35,17 +35,19 @@ export function Modal({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[200] flex items-center justify-center bg-[var(--modal-overlay)] p-4"
+      className="fixed inset-0 z-[200] overflow-y-auto overscroll-contain bg-[var(--modal-overlay)]"
       onClick={() => onOpenChange(false)}
     >
-      <div
-        className={cn(
-          "w-full max-w-md bg-[var(--color-card)] p-6 shadow-xl",
-          className,
-        )}
-        onClick={(event) => event.stopPropagation()}
-      >
-        {children}
+      <div className="flex min-h-full items-center justify-center p-4">
+        <div
+          className={cn(
+            "my-auto max-h-[calc(100dvh-2rem)] w-full min-h-0 max-w-md overflow-y-auto overscroll-contain bg-[var(--color-card)] p-6 shadow-xl",
+            className,
+          )}
+          onClick={(event) => event.stopPropagation()}
+        >
+          {children}
+        </div>
       </div>
     </div>,
     document.body,
